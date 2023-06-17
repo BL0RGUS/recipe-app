@@ -1,0 +1,50 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @recipe %>
+
+<div>
+  <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
+  <%= link_to "Back to recipes", recipes_path %>
+
+  <%= button_to "Destroy this recipe", @recipe, method: :delete %>
+</div>
+
+<hr>
+
+<h1>Listing ingredients</h1>
+
+<table>
+  <tr>
+    <th>Ingredient</th>
+    <th>Measurement</th>
+    <th>Quantity</th>
+    <th>Recipe</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @recipe.ingredients.each do |ingredient| %>
+  <% if ingredient.persisted? %>
+    <tr>
+      <td><%= ingredient.ingredient %></td>
+      <td><%= ingredient.measurement %></td>
+      <td><%= ingredient.quantity %></td>
+      <td><%= ingredient.recipe %></td>
+      <td><%= link_to 'Show', [ingredient.recipe, ingredient] %></td>
+      <td><%= link_to 'Edit', edit_recipe_ingredient_path(ingredient.recipe, ingredient) %></td>
+      <td><%= link_to 'Destroy', [ingredient.recipe, ingredient], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %> 
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ingredient', new_recipe_ingredient_path(@recipe.id) %>
+
+<hr>
+
+<h1>New ingredient</h1>
+
+<%= render 'ingredients/form' %>
