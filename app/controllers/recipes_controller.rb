@@ -13,11 +13,14 @@ class RecipesController < ApplicationController
   # GET /recipes/1 or /recipes/1.json
   def show
     @ingredient = @recipe.ingredients.build
+    @recipe_method = @recipe.recipe_methods.build
   end
 
   # GET /recipes/new
   def new
-    @recipe = current_user.recipes.build
+    #@recipe = current_user.recipes.build
+    @ingredient = @recipe.ingredients.build
+    @recipe_method = @recipe.recipe_methods.build
   end
 
   # GET /recipes/1/edit
@@ -75,7 +78,7 @@ class RecipesController < ApplicationController
 
       # A list of the param names that can be used for filtering the Product list
     def filtering_params(params)
-      params.slice(:name, :cuisine)
+      params.slice(:query, :ingred)
     end
 
 end

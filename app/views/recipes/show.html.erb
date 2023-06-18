@@ -6,19 +6,18 @@
   <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
   <%= link_to "Back to recipes", recipes_path %>
 
-  <%= button_to "Destroy this recipe", @recipe, method: :delete %>
+  <%= button_to "Delete recipe", @recipe, method: :delete %>
 </div>
 
 <hr>
 
-<h1>Listing ingredients</h1>
+<h2>Ingredients</h2>
 
 <table>
   <tr>
     <th>Ingredient</th>
-    <th>Measurement</th>
     <th>Quantity</th>
-    <th>Recipe</th>
+    <th>Measurement</th>
     <th></th>
     <th></th>
     <th></th>
@@ -28,12 +27,10 @@
   <% if ingredient.persisted? %>
     <tr>
       <td><%= ingredient.ingredient %></td>
-      <td><%= ingredient.measurement %></td>
       <td><%= ingredient.quantity %></td>
-      <td><%= ingredient.recipe %></td>
-      <td><%= link_to 'Show', [ingredient.recipe, ingredient] %></td>
+      <td><%= ingredient.measurement %></td>
       <td><%= link_to 'Edit', edit_recipe_ingredient_path(ingredient.recipe, ingredient) %></td>
-      <td><%= link_to 'Destroy', [ingredient.recipe, ingredient], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Remove', [ingredient.recipe, ingredient], method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %> 
 <% end %>
@@ -41,10 +38,39 @@
 
 <br />
 
-<%= link_to 'New Ingredient', new_recipe_ingredient_path(@recipe.id) %>
+<hr>
+<h2>New ingredient</h2>
+
+<%= render 'ingredients/form' %>
+<br>
 
 <hr>
 
-<h1>New ingredient</h1>
+<h2>Method</h2>
 
-<%= render 'ingredients/form' %>
+<table>
+  <tr>
+    <th>Step</th>
+    <th>Details</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @recipe.recipe_methods.each do |recipe_method| %>
+  <% if recipe_method.persisted? %>
+    <tr>
+      <td><%= recipe_method.step %></td>
+      <td><%= recipe_method.details %></td>
+      <td><%= link_to 'Edit', edit_recipe_recipe_method_path(recipe_method.recipe, recipe_method) %></td>
+      <td><%= link_to 'Remove', [recipe_method.recipe, recipe_method], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %> 
+<% end %>
+</table>
+
+<br />
+<hr>
+
+<h2>Add Step</h2>
+
+<%= render 'recipe_methods/form' %>

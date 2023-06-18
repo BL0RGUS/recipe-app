@@ -44,7 +44,7 @@ class IngredientsController < ApplicationController
   def destroy
     @ingredient.destroy
 
-    redirect_to recipe_ingredients_url(@recipe)
+    redirect_to(@ingredient.recipe)
   end
 
   private
