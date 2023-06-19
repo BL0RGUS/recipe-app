@@ -33,7 +33,7 @@ class RecipeMethodsController < ApplicationController
 
   # PUT recipes/1/recipe_methods/1
   def update
-    if @recipe_method.update_attributes(recipe_method_params)
+    if @recipe_method.update(recipe_method_params)
       redirect_to(@recipe_method.recipe)
     else
       render action: 'edit'

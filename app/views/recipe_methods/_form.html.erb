@@ -13,13 +13,13 @@
 
   <div class="field">
     <%= f.label :number %><br />
-    <%= f.number_field :step %>
+    <%= f.number_field :step, class: "form-control"%>
   </div>
   <div class="field">
     <%= f.label :details %><br />
-    <%= f.text_area :details %>
+    <%= f.text_field :details, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit "Add Step" %>
+    <%= f.submit "Add Step", class: "btn btn-primary" %>
   </div>
 <% end %>

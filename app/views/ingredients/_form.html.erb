@@ -13,18 +13,18 @@
 
   <div class="field">
     <%= f.label :ingredient %><br />
-    <%= f.text_field :ingredient %>
+    <%= f.text_field :ingredient, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :quantity %><br />
-    <%= f.text_field :quantity %>
+    <%= f.text_field :quantity, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :measurement %><br />
-    <%= f.select :measurement, Ingredient::MEASUREMENT_OPTIONS %>
+    <%= f.select :measurement, Ingredient::MEASUREMENT_OPTIONS, {}, {:class => 'form-select' } %>
   </div>
-  <hr>
+  <br>
   <div class="actions">
-    <%= f.submit "Add Ingredient" %>
+    <%= f.submit "Add Ingredient", class: "btn btn-primary" %>
   </div>
 <% end %>

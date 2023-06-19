@@ -27,10 +27,10 @@ class Recipe < ApplicationRecord
   }
   
   scope :filter_by_ingred, ->(ingred) {
-    ingred = ingred.split(',')
-    request = "((\"" + ingred[0] + "\" IN (SELECT ingredient FROM ingredients WHERE recipes.id = ingredients.recipe_id))"
+    ingred = ingred.downcase.split(',')
+    request = "((\"" + ingred[0] + "\" IN (SELECT LOWER(ingredient) FROM ingredients WHERE recipes.id = ingredients.recipe_id))"
     for i in 1..ingred.length()-1
-      request << " AND (\"" + ingred[i]  + "\" IN (SELECT ingredient FROM ingredients WHERE recipes.id = ingredients.recipe_id))"
+      request << " AND (\"" + ingred[i]  + "\" IN (SELECT LOWER(ingredient) FROM ingredients WHERE recipes.id = ingredients.recipe_id))"
     end
     request << ")"
     puts request

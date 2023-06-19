@@ -13,20 +13,14 @@
 
   <div>
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_area :name %>
+    <%= form.text_field :name, class: "form-control"%>
   </div>
 
   <div>
     <%= form.label :cuisine, style: "display: block" %>
-    <%= form.text_area :cuisine %>
+    <%= form.text_field :cuisine,  class: "form-control" %>
   </div>
-
   <div>
-    <%= form.label :method, style: "display: block" %>
-    <%= form.text_area :method %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit "Create Recipe", class: "btn btn-primary" %>
   </div>
 <% end %>

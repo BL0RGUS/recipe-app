@@ -1,13 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @recipe %>
-
-<div>
-  <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
-  <%= link_to "Back to recipes", recipes_path %>
-
-  <%= button_to "Delete recipe", @recipe, method: :delete %>
-</div>
+<div class="card-title d-flex justify-content-between"><h1>
+<span><%= @recipe.name %></span>
+<%= link_to "Edit", edit_recipe_path(@recipe), class: 'btn btn-warning' %>
+<%= link_to "Delete", @recipe, method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %>
+<%= link_to "Back", recipes_path(@recipe) , class: 'btn btn-primary' %>
+</h1></div>
 
 <hr>
 
@@ -38,10 +36,38 @@
 
 <br />
 
-<hr>
-<h2>New ingredient</h2>
+<h6>New ingredient</h6>
 
-<%= render 'ingredients/form' %>
+<%= form_for([@ingredient.recipe, @ingredient]) do |f| %>
+  <% if @ingredient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ingredient.errors.count, "error") %> prohibited this ingredient from being saved:</h2>
+
+      <ul>
+      <% @ingredient.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="input-group">
+    <div class="field">
+      <%= f.text_field :ingredient,  placeholder: "Ingredient..", class: "form-control" %>
+    </div>
+    <div class="field">
+      <%= f.text_field :quantity,  placeholder: "Quantity..", class: "form-control" %>
+    </div>
+    <div class="field">
+      <%= f.select :measurement, Ingredient::MEASUREMENT_OPTIONS, {}, {:class => 'form-select' } %>
+    </div>
+    <br>
+    <div class="actions">
+      <%= f.submit "Add Ingredient", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+
 <br>
 
 <hr>
@@ -71,6 +97,30 @@
 <br />
 <hr>
 
-<h2>Add Step</h2>
+<h6>Add Step</h6>
 
-<%= render 'recipe_methods/form' %>
+<%= form_for([@recipe_method.recipe, @recipe_method]) do |f| %>
+  <% if @recipe_method.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recipe_method.errors.count, "error") %> prohibited this recipe_method from being saved:</h2>
+
+      <ul>
+      <% @recipe_method.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="input-group">
+    <div class="field">
+      <%= f.number_field :step, placeholder: "Step..", class: "form-control" %>
+    </div>
+    <div class="field">
+      <%= f.text_field :details,  placeholder: "Details..", class: "form-control" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Add Step", class: "btn btn-primary"%>
+    </div>
+  </div>
+<% end %>
+
